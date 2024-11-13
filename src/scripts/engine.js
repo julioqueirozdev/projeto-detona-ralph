@@ -25,7 +25,7 @@ const state = {
 
 function playSound(audioName){
     let audio = new Audio(`./src/audios/${audioName}.m4a`)
-    audio.volume = 0.2;
+    audio.volume = 0.4;
     audio.play()
 }
 
@@ -62,15 +62,15 @@ function addListenerHitBox(){
                 state.view.score.textContent = state.values.result;
                 state.values.hitPosition = null;
                 playSound('hit')
+            } else {
+                state.values.currentLives--
+                state.view.lives.textContent = state.values.currentLives;
+                playSound('error')
             };
-            // if(square.id !== state.values.hitPosition){
-            //     state.values.currentLives--
-            //     state.view.lives.textContent = state.values.currentLives;
-            // };
-            // if(state.values.currentLives === 0){
-            //     alert('Game Over!')
-            //     location.reload();
-            // }
+            if(state.values.currentLives === 0){
+                alert('Game Over!')
+                location.reload();
+            }
         })
     });
 };
